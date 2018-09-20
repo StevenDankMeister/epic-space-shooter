@@ -8,15 +8,19 @@ public class Boundary
     public float xMin, xMax, zMin, zMax;
 }
 
+[RequireComponent(typeof(AudioSource))]
 public class PlayerController : MonoBehaviour {
 
     public float speed;
     public float tilt;
-    private Rigidbody rb;
+
     public Boundary boundary;
     public float fireRate;
     public GameObject shot;
     public Transform shotSpawn;
+
+    private Rigidbody rb;
+    AudioSource audio;
 
 
     private float nextFire;
@@ -24,6 +28,7 @@ public class PlayerController : MonoBehaviour {
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audio = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -42,8 +47,9 @@ public class PlayerController : MonoBehaviour {
             {
                 Instantiate(shot, shotSpawn.position + new Vector3(-1, 0.0f, 0.0f), shotSpawn.rotation);
                 Instantiate(shot, shotSpawn.position + new Vector3(1, 0.0f, 0.0f), shotSpawn.rotation);
-            }
+            }            
             nextFire = Time.time + fireRate;
+            audio.Play();
         }
     }
 
