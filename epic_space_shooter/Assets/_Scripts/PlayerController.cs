@@ -30,8 +30,20 @@ public class PlayerController : MonoBehaviour {
     {
         if (Input.GetButton("Fire1") && Time.time > nextFire)
         {
+            if (Input.GetButton("Fire2"))
+            {
+                print("shift held");
+
+                Instantiate(shot, shotSpawn.position + new Vector3(-0.20f, 0.0f, 0.0f), shotSpawn.rotation);
+                Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
+                Instantiate(shot, shotSpawn.position + new Vector3(0.20f, 0.0f, 0.0f), shotSpawn.rotation);
+            }
+            else
+            {
+                Instantiate(shot, shotSpawn.position + new Vector3(-1, 0.0f, 0.0f), shotSpawn.rotation);
+                Instantiate(shot, shotSpawn.position + new Vector3(1, 0.0f, 0.0f), shotSpawn.rotation);
+            }
             nextFire = Time.time + fireRate;
-            Instantiate(shot, shotSpawn.position, shotSpawn.rotation);
         }
     }
 
